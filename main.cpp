@@ -158,7 +158,7 @@ void itoa8_benchmark(std::uint32_t time)
     T.start();
     for(std::uint32_t i = time; i > 0; i--)
     {
-        snprintf(buf, sizeof(buf), "%llo", i);
+        snprintf(buf, sizeof(buf), "%o", i);
     }
     T.finish();
     std::cout << T.elapsed_ms() << " ms" << std::endl;
@@ -224,7 +224,7 @@ void itoa10_benchmark(std::uint32_t time)
     T.start();
     for(std::uint32_t i = time; i > 0; i--)
     {
-        snprintf(buf, sizeof(buf), "%lld", i);
+        snprintf(buf, sizeof(buf), "%d", i);
     }
     T.finish();
     std::cout << T.elapsed_ms() << " ms" << std::endl;
@@ -301,7 +301,7 @@ void itoa16_benchmark(std::uint32_t time)
     T.start();
     for(std::uint32_t i = time; i > 0; i--)
     {
-        snprintf(buf, sizeof(buf), "%llx", i);
+        snprintf(buf, sizeof(buf), "%x", i);
     }
     T.finish();
     std::cout << T.elapsed_ms() << " ms" << std::endl;
@@ -323,7 +323,7 @@ void itoa16_benchmark(std::uint32_t time)
 
 int main()
 {
-    std::uintmax_t count = 100000000;
+    std::uint32_t count = 100000000;
     std::cout << "Count: " << count << std::endl;
     if(check_itoa2_validity())
         itoa2_benchmark(count);
