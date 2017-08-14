@@ -57,6 +57,11 @@ bool check_itoa2_validity()
         ReHu::itoa2<wchar_t>(19971007) == L"1001100001011101110111111" &&
         ReHu::itoa2<char>(0) == "0" &&
         ReHu::itoa2<char>(1) == "1" &&
+        ReHu::itoa2<char>(-123).substr(1) == ReHu::itoa2<char>(123) &&
+        ReHu::itoa2<char>(-456).substr(1) == ReHu::itoa2<char>(456) &&
+        ReHu::itoa2<char>(-789).substr(1) == ReHu::itoa2<char>(789) &&
+        ReHu::itoa2<wchar_t>(-19971007).substr(1) == ReHu::itoa2<wchar_t>(19971007) &&
+        ReHu::itoa2<char>(-1).substr(1) == ReHu::itoa2<char>(1) &&
         ReHu::itoa2<char>(max - 1) == max_minus_1_bits.to_string() &&
         ReHu::itoa2<wchar_t>(max) == max_bits.template to_string<wchar_t>()))
     {
@@ -106,6 +111,17 @@ bool check_itoa8_validity()
         if(L != buf)
         {
             std::cout << "ERROR: L -> " << L << " R -> " << buf << std::endl;
+            return false;
+        }
+    }
+
+    for(std::int16_t i = 1; i < std::numeric_limits<std::int16_t>::max() / 2; i++)
+    {
+        snprintf(buf, sizeof(buf), "%o", i);
+        auto L = ReHu::itoa8<char>(-i);
+        if(L.substr(1) != buf)
+        {
+            std::cout << "ERROR: L -> " << L.substr(1) << " R -> " << buf << std::endl;
             return false;
         }
     }
@@ -238,6 +254,17 @@ bool check_itoa16_validity()
         if(L != buf)
         {
             std::cout << "ERROR: L -> " << L << " R -> " << buf << std::endl;
+            return false;
+        }
+    }
+
+    for(std::int16_t i = 1; i < std::numeric_limits<std::int16_t>::max() / 2; i++)
+    {
+        snprintf(buf, sizeof(buf), "%x", i);
+        auto L = ReHu::itoa16<char>(-i);
+        if(L.substr(1) != buf)
+        {
+            std::cout << "ERROR: L -> " << L.substr(1) << " R -> " << buf << std::endl;
             return false;
         }
     }
